@@ -5,12 +5,13 @@ function CSR_dense(data){
 		});
 		var data_dense = [];
 		for (i=0;i<numrows; i++){
-			var row =[];
+			var row =[];		
 			var start = parseFloat(data[2][i]);
 			for(j=0;j<numcols; j++){
-				if (j == data[1][start]){
-					row.push(parseFloat(data[0][start]));				
+				if (j+1 == data[1][start-1]){
+					row.push(parseFloat(data[0][start-1]));				
 					start++;
+					console.log(start);
 				} else {
 					row.push(0);
 				}
