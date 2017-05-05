@@ -49,7 +49,10 @@ function handleFiles(files) {
 			var opt2=document.getElementById('option2').value;
       var str= document.getElementById("mytext").value;
       str=str/100.0;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2c91b54e30e1e0d6e668fff380c990646d263834
 			if(opt2=="csr"){
 				 var data_dense=CSR_dense(data);
 			}
@@ -69,10 +72,23 @@ function handleFiles(files) {
 			else if(opt2="Incident"){
 				var graph = Inc_json(data_dense);
 			}
+<<<<<<< HEAD
 			var w = 1000;
 			var h = 600;
 
       d3.select("svg").remove();
+=======
+
+			var w = 1000;
+			var h = 600;
+
+      d3.select("svg").remove();
+
+			console.log(graph);
+			var w = 1000;
+			var h = 600;
+
+>>>>>>> 2c91b54e30e1e0d6e668fff380c990646d263834
 
 			var svg = d3.select("body")
 											.append("svg")
@@ -109,6 +125,7 @@ function handleFiles(files) {
                 .on("drag", dragged)
                 .on("end", dragended));
 
+								.attr("fill", function(d){return color(d.group);});
 
 			simulation.nodes(graph.nodes)
 								.on("tick", ticked);
@@ -141,7 +158,10 @@ function handleFiles(files) {
           d.fx = null;
           d.fy = null;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2c91b54e30e1e0d6e668fff380c990646d263834
 
 		}
 
