@@ -141,7 +141,9 @@ function handleFiles(files) {
 			for(var i=0;i< dimensions[0];i++){
 				json_data['nodes'].push({"id":i,"group":i})
 				for(var j=0;j<i;j++){
+          if(data_dense[i][j]!=0){
 					json_data['links'].push({"source":i,"target":j,"value":data_dense[i][j]});
+        }
 				}
 			}
 			return json_data;
@@ -155,12 +157,11 @@ function handleFiles(files) {
 					var indices=[];
 					for(var i=0;i<dimensions[0];i++){
 						json_data['nodes'].push({"id":i,"group":i})
-						if(data_dense[i][j]>0){
+						if(data_dense[i][j]!=0){
 							indices.push(i);
 						}
 					}
 					json_data['links'].push({"source":indices[0],"target":indices[1],"value":data_dense[indices[0]][j]});
 				}
 			return json_data;
-			return data_dense;
 		}
