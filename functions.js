@@ -5,12 +5,13 @@ function CSR_dense(data){
 		});
 		var data_dense = [];
 		for (i=0;i<numrows; i++){
-			var row =[];
+			var row =[];		
 			var start = parseFloat(data[2][i]);
 			for(j=0;j<numcols; j++){
-				if (j == data[1][start]){
-					row.push(parseFloat(data[0][start]));				
+				if (j+1 == data[1][start-1]){
+					row.push(parseFloat(data[0][start-1]));				
 					start++;
+					console.log(start);
 				} else {
 					row.push(0);
 				}
@@ -19,10 +20,32 @@ function CSR_dense(data){
 			data_dense.push(row);
 		}
 		return data_dense
-}
+	}
 
 	function CSC_dense(data){
-		return data;
+		var numcols = data[2].length-1;
+		var numrows = data[1].reduce(function(a, b) {
+    		return Math.max(a, b);
+		});
+		var data_dense = [];
+
+		for (i=0;i<numcols; i++){
+			var col =[];		
+			var start = parseFloat(data[2][i]);
+			for(j=0;j<numrows; j++){
+				if (j+1 == data[1][start-1]){
+					col.push(parseFloat(data[0][start-1]));				
+					start++;
+					console.log(start);
+				} else {
+					col.push(0);
+				}
+
+			}
+			data_dense.push(col);
+		}
+
+		return data_dense;
 	}
 
 	function COO_dense(data){

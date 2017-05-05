@@ -34,7 +34,6 @@ function handleFiles(files) {
                 }
                 lines.push(tarr);
         }
-      console.log(lines);
 			return lines;
     }
 
@@ -48,6 +47,8 @@ function handleFiles(files) {
 			var data=original_data;
 			var opt1=document.getElementById('option1').value;
 			var opt2=document.getElementById('option2').value;
+      var str= document.getElementById("mytext").value;
+      str=str/100.0;
 
 			if(opt2=="csr"){
 				 var data_dense=CSR_dense(data);
@@ -68,9 +69,10 @@ function handleFiles(files) {
 			else if(opt2="Incident"){
 				var graph = Inc_json(data_dense);
 			}
-			console.log(graph);
 			var w = 1000;
 			var h = 600;
+
+      d3.select("svg").remove();
 
 			var svg = d3.select("body")
 											.append("svg")
@@ -79,7 +81,7 @@ function handleFiles(files) {
 
 			var simulation = d3.forceSimulation()
 							.force("link", d3.forceLink().id(function(d) {return d.id;}))
-							.force("link",d3.forceLink().distance(function(d){return d.value;}).strength(0.1))
+							.force("link",d3.forceLink().distance(function(d){return d.value;}).strength(str))
 							.force("charge", d3.forceManyBody())
 							.force("center", d3.forceCenter(w / 2, h / 2));
 
@@ -101,7 +103,11 @@ function handleFiles(files) {
 								.enter()
 								.append("circle")
 								.attr("r", "5px")
-								.attr("fill", function(d){return color(d.group);});
+								.attr("fill", function(d){return color(d.group);})
+                .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
 
 
 			simulation.nodes(graph.nodes)
@@ -119,12 +125,48 @@ function handleFiles(files) {
 							.attr("cy", function(d) { return d.y; });
 				}
 
+        function dragstarted(d) {
+          if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+          d.fx = d.x;
+          d.fy = d.y;
+          }
+
+        function dragged(d) {
+          d.fx = d3.event.x;
+          d.fy = d3.event.y;
+        }
+
+        function dragended(d) {
+          if (!d3.event.active) simulation.alphaTarget(0);
+          d.fx = null;
+          d.fy = null;
+        }
+
 
 		}
 
 
 		function CSR_dense(data){
-			return data;
+					var numrows = data[2].length-1;
+		var numcols = data[1].reduce(function(a, b) {
+    		return Math.max(a, b);
+		});
+		var data_dense = [];
+		for (i=0;i<numrows; i++){
+			var row =[];
+			var start = parseFloat(data[2][i]);
+			for(j=0;j<numcols; j++){
+				if (j+1 == data[1][start-1]){
+					row.push(parseFloat(data[0][start-1]));
+					start++;
+				} else {
+					row.push(0);
+				}
+
+			}
+			data_dense.push(row);
+		}
+		return data_dense;
 		}
 
 		function CSC_dense(data){
