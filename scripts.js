@@ -62,14 +62,64 @@ function handleFiles(files) {
 				var data_dense=data;
 			}
 
-			if(opt1=="adjacency"){
-				var json_data=Adj_json(data_dense);
+			if(opt1=="Adjacency"){
+				var graph=Adj_json(data_dense);
 			}
-			else if(opt2="incident"){
-				var json_data = Inc_json(data_dense);
+			else if(opt2="Incident"){
+				var graph = Inc_json(data_dense);
 			}
+			var w = 1000;
+			var h = 600;
+
+			var svg = d3.select("body")
+											.append("svg")
+											.attr("height", h)
+											.attr("width", w);
+
+			var simulation = d3.forceSimulation()
+							.force("link", d3.forceLink().id(function(d) { return d.id; }))
+							.force("charge", d3.forceManyBody())
+							.force("center", d3.forceCenter(w / 2, h / 2));
+
+			var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+			var link = svg.append("g")
+								.attr("class","links")
+								.selectAll("line")
+								.data(graph.links)
+								.enter()
+								.append("line")
+								.attr("stroke-width","2px")
+								.attr("fill", 'black');
+
+			var node = svg.append("g")
+								.attr("class","nodes")
+								.selectAll("circle")
+								.data(graph.nodes)
+								.enter()
+								.append("circle")
+								.attr("r", "5px")
+								.attr("fill", function(d){return color(d.group);});
+
+
+			simulation.nodes(graph.nodes)
+								.on("tick", ticked);
+
+			simulation.force("link")
+								.links(graph.links);
+			function ticked() {
+					link.attr("x1", function(d) { return d.source.x; })
+							.attr("y1", function(d) { return d.source.y; })
+							.attr("x2", function(d) { return d.target.x; })
+							.attr("y2", function(d) { return d.target.y; });
+
+					node.attr("cx", function(d) { return d.x; })
+							.attr("cy", function(d) { return d.y; });
+				}
+
 
 		}
+
 
 		function CSR_dense(data){
 			return data;
@@ -84,7 +134,15 @@ function handleFiles(files) {
 		}
 
 		function Adj_json(data_dense){
-			return data_dense;
+			var json_data={"nodes":[],"links":[]};
+			var dimensions = [ data_dense.length, data_dense[0].length ];
+			for(var i=0;i< dimensions[0];i++){
+				json_data['nodes'].push({"id":i,"group":i})
+				for(var j=0;j<i;j++){
+					json_data['links'].push({"source":i,"target":j,"value":data_dense[i][j]});
+				}
+			}
+			return json_data;
 		}
 
 		function Inc_json(data_dense){
