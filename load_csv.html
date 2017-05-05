@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<head>
+   <script src="https://d3js.org/d3.v4.min.js"></script>
+	 <link rel="stylesheet" href="mysheet.css" type="text/css" />
+	 <script tpye="text/javascript" src="scripts.js"></script>
+</head>
+
+<body>
+	add an empty line in the end (only 1)
+<input type="file" id="input_file" onchange="handleFiles(this.files)" accept=".csv">
+
+<select id="option1">
+  <option value="Adjacency">Adjacency</option>
+  <option value="Incident">Incident</option>
+</select>
+
+<select id="option2">
+  <option value="csr">CSR</option>
+  <option value="csc">CSC</option>
+  <option value="coo">COO</option>
+  <option value="dense">Dense</option>
+</select>
+
+<input type="submit" onclick="options()">
+
+</body>
+
+
+</html>
