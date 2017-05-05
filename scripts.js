@@ -34,10 +34,6 @@ function handleFiles(files) {
                 }
                 lines.push(tarr);
         }
-<<<<<<< HEAD
-=======
-      console.log(lines);
->>>>>>> 4bbad890137cb442fc0ccba7d32885555719f47e
 			return lines;
     }
 
@@ -51,12 +47,8 @@ function handleFiles(files) {
 			var data=original_data;
 			var opt1=document.getElementById('option1').value;
 			var opt2=document.getElementById('option2').value;
-<<<<<<< HEAD
       var str= document.getElementById("mytext").value;
       str=str/100.0;
-=======
->>>>>>> 4bbad890137cb442fc0ccba7d32885555719f47e
-
 			if(opt2=="csr"){
 				 var data_dense=CSR_dense(data);
 			}
@@ -76,18 +68,17 @@ function handleFiles(files) {
 			else if(opt2="Incident"){
 				var graph = Inc_json(data_dense);
 			}
-<<<<<<< HEAD
+
 			var w = 1000;
 			var h = 600;
 
       d3.select("svg").remove();
 
-=======
 			console.log(graph);
 			var w = 1000;
 			var h = 600;
 
->>>>>>> 4bbad890137cb442fc0ccba7d32885555719f47e
+
 			var svg = d3.select("body")
 											.append("svg")
 											.attr("height", h)
@@ -95,11 +86,7 @@ function handleFiles(files) {
 
 			var simulation = d3.forceSimulation()
 							.force("link", d3.forceLink().id(function(d) {return d.id;}))
-<<<<<<< HEAD
 							.force("link",d3.forceLink().distance(function(d){return d.value;}).strength(str))
-=======
-							.force("link",d3.forceLink().distance(function(d){return d.value;}).strength(0.1))
->>>>>>> 4bbad890137cb442fc0ccba7d32885555719f47e
 							.force("charge", d3.forceManyBody())
 							.force("center", d3.forceCenter(w / 2, h / 2));
 
@@ -121,16 +108,13 @@ function handleFiles(files) {
 								.enter()
 								.append("circle")
 								.attr("r", "5px")
-<<<<<<< HEAD
 								.attr("fill", function(d){return color(d.group);})
                 .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
                 .on("end", dragended));
-=======
-								.attr("fill", function(d){return color(d.group);});
->>>>>>> 4bbad890137cb442fc0ccba7d32885555719f47e
 
+								.attr("fill", function(d){return color(d.group);});
 
 			simulation.nodes(graph.nodes)
 								.on("tick", ticked);
@@ -147,7 +131,6 @@ function handleFiles(files) {
 							.attr("cy", function(d) { return d.y; });
 				}
 
-<<<<<<< HEAD
         function dragstarted(d) {
           if (!d3.event.active) simulation.alphaTarget(0.3).restart();
           d.fx = d.x;
@@ -165,14 +148,10 @@ function handleFiles(files) {
           d.fy = null;
         }
 
-=======
->>>>>>> 4bbad890137cb442fc0ccba7d32885555719f47e
-
 		}
 
 
 		function CSR_dense(data){
-<<<<<<< HEAD
 					var numrows = data[2].length-1;
 		var numcols = data[1].reduce(function(a, b) {
     		return Math.max(a, b);
@@ -193,9 +172,6 @@ function handleFiles(files) {
 			data_dense.push(row);
 		}
 		return data_dense;
-=======
-			return data;
->>>>>>> 4bbad890137cb442fc0ccba7d32885555719f47e
 		}
 
 		function CSC_dense(data){
