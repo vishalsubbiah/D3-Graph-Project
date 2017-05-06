@@ -3,55 +3,12 @@
 <head>
    <script src="https://d3js.org/d3.v4.min.js"></script>
 	 <script type="text/javascript" src="scripts.js"></script>
-   <script type="text/javascript" src="console-save.js"> </script>
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <link rel="stylesheet" href="mysheet.css" type="text/css">
-
-  <style type="text/css">
-  .navbar-brand,
-  .navbar-header{
-    line-height: 150px;
-    height: 80px;
-    padding-top: 0;
-    z-index: 0;
-  }
-  .navbar-fixed-top{
-    background-color: #404040;
-    background-image: none;
-    background-repeat: no-repeat;
-    z-index: 0;
-  }
-  .navbar-fixed-top { position: absolute!important; }
-
-
-  input.button{
-    background-color: #404040;
-  }
-
-  input[type=number]{
-    width: 80px;
-  } 
-  input[type=submit]{
-  width: 80px;
-  } 
-  h1{
-    color: #404040;
-  }
-  h3{
-    color: #404040 ;
-  }
-  svg{
-    /*position: absolute;*/
-    left: 300px;
-    top: 0px;
-    z-index: 10;
-  }
-  </style>
 
 </head>
 
@@ -103,16 +60,6 @@
 
 <input type="submit" onclick="options()">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script>
-    var test;
-    jQuery.get("Poisson.csv", function(file){
-      test = file;
-    });
-
-    // I ran the data process code by hand on test and d3 bugged out. It starts a graph and then fails. The point is that it is not a matter of not having the data yet. Maybe it is a matter of jQuery and d3 running at the same time? 
-  </script>
-  
 
 </body>
 

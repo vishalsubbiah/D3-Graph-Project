@@ -1,3 +1,8 @@
+var original_data;
+d3.json("data.json",function(d){
+  makegraph(d,0.1);
+});
+
 function handleFiles(files) {
       // Check for the various File API support.
       if (window.FileReader) {
@@ -17,7 +22,7 @@ function handleFiles(files) {
       reader.onload = loadHandler;
       reader.onerror = errorHandler;
     }
-		var original_data;
+
     function loadHandler(event) {
       var csv = event.target.result;
       original_data=processData(csv);
@@ -68,20 +73,18 @@ function handleFiles(files) {
 			else if(opt2="Incident"){
 				var graph = Inc_json(data_dense);
 			}
-			
-			makegraph(graph,str);	
+      //console.log(graph);
+			makegraph(graph,str);
 
 			}
-			
+
 
 			function makegraph(graph,str){
-
-			console.log(graph);
 
 			var w = 1200;
 			var h = 600;
 
-      		d3.select("svg").remove();
+      d3.select("svg").remove();
 
 			var svg = d3.select("body")
 											.append("svg")
@@ -129,9 +132,14 @@ function handleFiles(files) {
 							.attr("x2", function(d) { return d.target.x; })
 							.attr("y2", function(d) { return d.target.y; });
 
-					node.attr("cx", function(d) { return d.x; })
-							.attr("cy", function(d) { return d.y; });
+					node.attr("cx", function(d) { return validate(d.x,0,w); })
+							.attr("cy", function(d) { return validate(d.y,0,h); });
 				}
+        function validate(x, a, b) {
+            if (x < a) x = a+5;
+            if (x > b) x = b-5;
+            return x;
+}
 
         function dragstarted(d) {
           if (!d3.event.active) simulation.alphaTarget(0.3).restart();
@@ -202,18 +210,18 @@ function handleFiles(files) {
 
 		function COO_dense(data){
 			var numrows = data[1].reduce(function(a, b) {
-				return Math.max(a, b);	
+				return Math.max(a, b);
 			});
 
 			var numcols = data[2].reduce(function(a, b) {
-				return Math.max(a, b);	
+				return Math.max(a, b);
 			});
 
 			data_dense=[];
 			j=0;
 			count=0;
 			for (i=0;i<numrows; i++){
-				var row =[];	
+				var row =[];
 				for(j=0;j<numcols; j++){
 					if (data[1][count] == i+1 && data[2][count] == j+1) {row.push(data[0][count]); count++;}
 					else {row.push(0);}
@@ -255,12 +263,3 @@ function handleFiles(files) {
 				}
 			return json_data;
 		}
-
-  // Commented: Another delay method that did not work.  
-  //  function defer(method,poisson_data) {
-  //   		if (window.jQuery)
-  //      			 method(poisson_data);
-  //   		else
-  //       	setTimeout(function() { defer(method,poisson_data) }, 50);
-  //   	}
-
