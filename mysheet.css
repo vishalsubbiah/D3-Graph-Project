@@ -11,3 +11,42 @@
  input{
     width:50%;
   }
+
+  .navbar-brand,
+  .navbar-header{
+    line-height: 150px;
+    height: 80px;
+    padding-top: 0;
+    z-index: 0;
+  }
+  .navbar-fixed-top{
+    background-color: #404040;
+    background-image: none;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
+  .navbar-fixed-top { position: absolute!important; }
+
+
+  input.button{
+    background-color: #404040;
+  }
+
+  input[type=number]{
+    width: 80px;
+  } 
+  input[type=submit]{
+  width: 80px;
+  } 
+  h1{
+    color: #404040;
+  }
+  h3{
+    color: #404040 ;
+  }
+  svg {
+    /*position: absolute;*/
+    left: 300px;
+    top: 0px;
+    z-index: 10;
+  }

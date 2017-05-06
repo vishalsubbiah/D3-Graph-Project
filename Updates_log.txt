@@ -1,0 +1,15 @@
+May 6, 2017. Alex. 
+Changes:
+(1) I changed scripts.js to split options() and makegraph() so that I could call makegraph directly with the Poisson data. 
+(2) COO.
+(3) Styling.
+(4) Poisson data. 
+(5) Added console save from a Github, it lets you save Json files directly to text. I used this to create the Poisson.json data file. I first ran our code on Poisson.csv via input, and then ran console.save on it from the Chrome developer browser. 
+
+
+Issues: 
+(1) Unable to get the Poisson.csv to start at run time. 
+Things I tried:
+jQuery.get, jQuery.json, d3.json-- I think they are all the same. The thing I learned here is that you have to use a callback function, or else it will try to run makegraph at run time. 
+
+(2) Unable to move CSS styling to the style sheet, even after I call the stylesheet after the bootstrap styles. 

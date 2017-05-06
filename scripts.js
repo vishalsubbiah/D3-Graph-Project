@@ -256,9 +256,11 @@ function handleFiles(files) {
 			return json_data;
 		}
 
-		function defer(method,poisson_data) {
-    		if (window.jQuery)
-       			 method(poisson_data);
-    		else
-        	setTimeout(function() { defer(method,poisson_data) }, 50);
-    	}
+  // Commented: Another delay method that did not work.  
+  //  function defer(method,poisson_data) {
+  //   		if (window.jQuery)
+  //      			 method(poisson_data);
+  //   		else
+  //       	setTimeout(function() { defer(method,poisson_data) }, 50);
+  //   	}
+
