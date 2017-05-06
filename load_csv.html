@@ -3,10 +3,89 @@
 <head>
    <script src="https://d3js.org/d3.v4.min.js"></script>
 	 <link rel="stylesheet" href="mysheet.css" type="text/css" />
-	 <script tpye="text/javascript" src="scripts.js"></script>
+	 <script type="text/javascript" src="scripts.js"></script>
+   <script type="text/javascript" src="console-save.js"> </script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+
+  <style>
+  .navbar-brand,
+  .navbar-header{
+    line-height: 150px;
+    height: 80px;
+    padding-top: 0;
+  }
+  .navbar-fixed-top{
+    background-color: #404040;
+    background-image: none;
+    background-repeat: no-repeat;
+  }
+  .navbar-fixed-top { position: absolute!important; }
+
+
+  input.button{
+    background-color: #404040;
+  }
+
+  input[type=number]{
+    width: 80px;
+  } 
+  input[type=submit]{
+  width: 80px;
+  } 
+  h1{
+    color: #404040;
+  }
+  h3{
+    color: #404040 ;
+  }
+  svg {
+    position: absolute;
+    left: 140px;
+    top: 0;
+    z-index: -1;
+  }
+  </style>
+
 </head>
 
 <body>
+
+<!-- Fixed navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand"> </a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+
+<br><br>
+<br><br>
+
+<h1> Graph Data Visualization </h1>
+<!-- <h3> by Vishal and Alex </h3> -->
+
+<br><br>
+
+
 <input type="file" id="input_file" onchange="handleFiles(this.files)" accept=".csv">
 
 <select id="option1">
@@ -24,6 +103,16 @@
 <input type="number" id="mytext" min="0" max="100" value="10"/>
 
 <input type="submit" onclick="options()">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    var poisson_data
+    jQuery.getJSON("http://localhost:8000/lepoisson.json",function(json){
+      poisson_data = Adj_json(json);
+    });
+    defer(makegraph,poisson_data);
+</script>
+  
 
 </body>
 

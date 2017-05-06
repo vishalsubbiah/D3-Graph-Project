@@ -68,11 +68,20 @@ function handleFiles(files) {
 			else if(opt2="Incident"){
 				var graph = Inc_json(data_dense);
 			}
+			
+			makegraph(graph,str);	
 
-			var w = 1000;
+			}
+			
+
+			function makegraph(graph,str){
+
+			console.log(graph);
+
+			var w = 1200;
 			var h = 600;
 
-      d3.select("svg").remove();
+      		d3.select("svg").remove();
 
 			var svg = d3.select("body")
 											.append("svg")
@@ -192,8 +201,29 @@ function handleFiles(files) {
 		}
 
 		function COO_dense(data){
-			return data;
+			var numrows = data[1].reduce(function(a, b) {
+				return Math.max(a, b);	
+			});
+
+			var numcols = data[2].reduce(function(a, b) {
+				return Math.max(a, b);	
+			});
+
+			data_dense=[];
+			j=0;
+			count=0;
+			for (i=0;i<numrows; i++){
+				var row =[];	
+				for(j=0;j<numcols; j++){
+					if (data[1][count] == i+1 && data[2][count] == j+1) {row.push(data[0][count]); count++;}
+					else {row.push(0);}
+				}
+				data_dense.push(row);
+			}
+
+			return data_dense;
 		}
+
 
 		function Adj_json(data_dense){
 			var json_data={"nodes":[],"links":[]};
@@ -225,3 +255,10 @@ function handleFiles(files) {
 				}
 			return json_data;
 		}
+
+		function defer(method,poisson_data) {
+    		if (window.jQuery)
+       			 method(poisson_data);
+    		else
+        	setTimeout(function() { defer(method,poisson_data) }, 50);
+    	}
