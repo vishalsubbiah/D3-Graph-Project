@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<head>
+   <script src="https://d3js.org/d3.v4.min.js"></script>
+	 <script type="text/javascript" src="scripts.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="mysheet.css" type="text/css">
+
+</head>
+
+<body>
+
+<!-- Fixed navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand"> </a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+
+<br><br>
+<br><br>
+
+<h1> Graph Data Visualization </h1>
+<!-- <h3> by Vishal and Alex </h3> -->
+<br><br>
+
+
+<input type="file" id="input_file" onchange="handleFiles(this.files)" accept=".csv">
+
+<select id="option1">
+  <option value="Adjacency">Adjacency</option>
+  <option value="Incident">Incident</option>
+</select>
+
+<select id="option2">
+  <option value="csr">CSR</option>
+  <option value="csc">CSC</option>
+  <option value="coo">COO</option>
+  <option value="dense">Dense</option>
+</select>
+
+<input type="number" id="mytext" min="0" max="100" value="10"/>
+
+<input type="submit" onclick="options()">
+
+
+</body>
+
+
+</html>
