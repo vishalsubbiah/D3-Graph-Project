@@ -1,6 +1,20 @@
 var original_data;
 d3.json("data.json",function(d){
-  makegraph(d,0.1);
+  d3.select("body")
+     .append("h2")
+     .attr("class","apple")
+     .text("Poisson")
+     .style("text-align","center");
+  makegraph1(d,0.1);
+});
+
+d3.json("ten.json",function(d){
+  d3.select("body")
+     .append("h2")
+     .attr("class","apple")
+     .text("Tree")
+     .style("text-align","center");
+  makegraph1(d,0.1);
 });
 
 function handleFiles(files) {
@@ -73,7 +87,7 @@ function handleFiles(files) {
 			else if(opt2="Incident"){
 				var graph = Inc_json(data_dense);
 			}
-      //console.log(graph);
+      console.log(graph);
 			makegraph(graph,str);
 
 			}
@@ -84,7 +98,8 @@ function handleFiles(files) {
 			var w = 1200;
 			var h = 600;
 
-      d3.select("svg").remove();
+      d3.selectAll("svg").remove();
+      d3.selectAll("h2.apple").remove();
 
 			var svg = d3.select("body")
 											.append("svg")
@@ -263,3 +278,82 @@ function handleFiles(files) {
 				}
 			return json_data;
 		}
+
+
+function makegraph1(graph,str){
+
+var w = 1200;
+var h = 600;
+
+var svg = d3.select("body")
+                .append("svg")
+                .attr("height", h)
+                .attr("width", w);
+
+var simulation = d3.forceSimulation()
+        .force("link", d3.forceLink().id(function(d) {return d.id;}))
+        .force("link",d3.forceLink().distance(function(d){return d.value;}).strength(str))
+        .force("charge", d3.forceManyBody())
+        .force("center", d3.forceCenter(w / 2, h / 2));
+
+var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+var link = svg.append("g")
+          .attr("class","links")
+          .selectAll("line")
+          .data(graph.links)
+          .enter()
+          .append("line")
+          .attr("stroke-width","2px")
+          .attr("fill", 'black');
+
+var node = svg.append("g")
+          .attr("class","nodes")
+          .selectAll("circle")
+          .data(graph.nodes)
+          .enter()
+          .append("circle")
+          .attr("r", "5px")
+          .attr("fill", function(d){return color(d.group);})
+          .call(d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
+
+simulation.nodes(graph.nodes)
+          .on("tick", ticked);
+
+simulation.force("link")
+          .links(graph.links);
+function ticked() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("cx", function(d) { return validate(d.x,0,w); })
+        .attr("cy", function(d) { return validate(d.y,0,h); });
+  }
+  function validate(x, a, b) {
+      if (x < a) x = a+5;
+      if (x > b) x = b-5;
+      return x;
+}
+
+  function dragstarted(d) {
+    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+    }
+
+  function dragged(d) {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+  }
+
+  function dragended(d) {
+    if (!d3.event.active) simulation.alphaTarget(0);
+    d.fx = null;
+    d.fy = null;
+  }
+}
