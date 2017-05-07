@@ -3,18 +3,39 @@ d3.json("data.json",function(d){
   d3.select("body")
      .append("h2")
      .attr("class","apple")
-     .text("Poisson")
-     .style("text-align","center");
+     .text("Je suis Poisson");
+     // .style("text-align","center");
+
+	d3.select("body")
+	  .append("p")
+	  .attr("class","bodywords")
+	  .text("As an example, here's the graph of the stiffness matrix after discretizing the Dirichlet Poisson problem with periodic right hand side. It is an interesting question whether or not the structure of a matrix derived from a system (for example, physical systems in the case of discretized PDEs) can be identified with the structure of the graph upon reaching equilibrium with respect to the edge-forces. The collection of beautiful visualizations of large sparse matrices collected by Tim Davis might suggest this is the case. However, it is not clear that the structure imposed by positing a force law for the edges overshadows any structure that might be inherent in the matrices and the systems they represent. For the sake of curiosity, other researches might try to visualize their problem with this app. Whether or not it will have consequential interpretations, is up to the researcher. ");
+
+
   makegraph1(d,0.1);
+
+ 
 });
 
 d3.json("ten.json",function(d){
+
   d3.select("body")
      .append("h2")
      .attr("class","apple")
-     .text("Tree")
-     .style("text-align","center");
+     .text("Tree");
+     // .style("text-align","center");	
+ 
+  d3.select("body")
+	  .append("p")
+	  .attr("class","bodywords")
+	  .text("We also hope this visualization might be useful for people who want to quickly take matrices from spectral graph theory and linear algebra classes to visualize them. For example we constructed the adjacency matrix for a tree and then found the permutation so that it was more obviously in bipartite form. ");
+
+
   makegraph1(d,0.1);
+
+
+
+
 });
 
 function handleFiles(files) {

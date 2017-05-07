@@ -30,20 +30,23 @@
  .navbar-fixed-top { position: absolute!important; }
 
 
- input.button{
-	 background-color: #404040;
- }
-
  input[type=number]{
 	 width: 80px;
  }
  input[type=submit]{
+
  width: 80px;
  }
  h1{
+     margin: 0cm 0cm 0cm 1.4cm ;	
 	 color: #404040;
  }
  h3{
+ 	margin: 0cm 0cm 0cm 1.4cm;
+	 color: #404040 ;
+ }
+  h2{
+  	 margin: .5cm 0cm .5cm 1.4cm;
 	 color: #404040 ;
  }
  svg{
@@ -52,3 +55,11 @@
 	 top: 0px;
 	 z-index: 10;
  }
+p{	
+	margin: 0cm 0cm 0cm 1cm ;
+	z-index: 0;
+}
+#input{
+	margin: 0cm 0cm 0cm 1cm;
+}
+
