@@ -38,13 +38,14 @@
  width: 80px;
  }
  h1{
-     margin: 0cm 0cm 0cm 1.4cm ;	
+     margin: 0cm 0cm 0cm 1.4cm ;
 	 color: #404040;
  }
  h3{
  	margin: 0cm 0cm 0cm 1.4cm;
 	 color: #404040 ;
  }
+
   h2{
   	 margin: .5cm 0cm .5cm 1.4cm;
 	 color: #404040 ;
@@ -55,11 +56,14 @@
 	 top: 0px;
 	 z-index: 10;
  }
-p{	
+p{
 	margin: 0cm 0cm 0cm 1cm ;
 	z-index: 0;
 }
 #input{
 	margin: 0cm 0cm 0cm 1cm;
 }
-
+#team{
+	text-align:right;
+	margin: 0cm 1cm 0cm 0cm;
+}
